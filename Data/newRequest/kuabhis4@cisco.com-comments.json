@@ -1,0 +1,24 @@
+{
+    "requestID": 1234567,
+    "requestorEmailID": "kuabhis4@cisco.com",
+    "LoE": {
+        "description": "Check LoE against requirement. If not, Flag",
+        "comments": "LoE is complete"
+    },
+    "ResourceType_PM_Risk_Margins": {
+        "description": "Resource Type/PM/Risk/Margins",
+        "comments": "Resource type is Resourcetype1"
+    },
+    "TandEorPCOGs": {
+        "description": "T&E , PCOGs",
+        "comments": "T & E is to be displayed on an event"
+    },
+    "scopeDocDeliverablesAandE": {
+        "description": "Scope, Doc Deliverables, A&E",
+        "comments": "Doc deliverables would be process docs and few others"
+    },
+    "docsAttached": {
+        "description": "Deal docs attached in PET?",
+        "comments": "attached 5 docs"
+    }
+}
