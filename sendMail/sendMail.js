@@ -1,4 +1,4 @@
-module.exports.sendMail = (toEmail, requestID) => {
+module.exports.sendMail = (toEmail, PID, checklistType, message) => {
     var nodemailer = require('nodemailer');
 
     var transporter = nodemailer.createTransport({
@@ -9,13 +9,23 @@ module.exports.sendMail = (toEmail, requestID) => {
         }
     });
 
+    // var transporter = nodemailer.createTransport({
+    //     host: 'mail.cisco.com',
+    //     port: 587,
+    //     secure: false,
+    //     auth: {
+    //         user: '',
+    //         pass: ''
+    //     }
+    // });
+
     var mailOptions = {
         from: 'mailscheck123@gmail.com',
         to: toEmail,
-        subject: "requestID: "+requestID,
-        text: "Hi,\nAll approvals has been granted to requestID: "+requestID+". User response with respect to checklist has been attached. Please check & inform user for further procedures.",
+        subject: checklistType + " Checklist : " + PID,
+        text: message,
         attachments: [{
-            path: './Data/newRequest/kuabhis4@cisco.com-comments.json'
+            path: './Data/newRequest/' + PID + '-' + checklistType + '.json'
         }]
     };
 

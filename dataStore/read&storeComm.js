@@ -1,25 +1,25 @@
-module.exports.readfile = (email, comment, checklist) => {
+module.exports.readfile = (data2store,checklist,checklistType) => {
     const fs = require("fs");
     const dataStore = require("./dataStore");
 
-    fs.readFile('./Data/newRequest/' + email + '-comments.json', 'utf-8', function (err, data) {
+    fs.readFile('./Data/newRequest/'+ data2store.petFileNumber+'-'+checklistType+'.json', 'utf-8', function (err, data) {
         if (err) console.log(err);
         userComments = JSON.parse(data);
 
         if (checklist === "LoE")
-            userComments.LoE = comment;
+            userComments.LoE = data2store.LoE;
         if(checklist === "ResourceType_PM_Risk_Margins")
-            userComments.ResourceType_PM_Risk_Margins = comment;
+            userComments.ResourceType = data2store.ResourceType;
         if (checklist === "TandEorPCOGs")
-            userComments.TandEorPCOGs = comment;
+            userComments.TandE = data2store.TandE;
         if (checklist === "scopeDocDeliverablesAandE")
-            userComments.scopeDocDeliverablesAandE = comment;
+            userComments.scope = data2store.scope;
         if (checklist === "docsAttached")
-            userComments.docsAttached = comment;
+            userComments.DealDocs = data2store.DealDocs;
 
-        filename = "./Data/newRequest/" + email + "-comments.json";
+        filename = './Data/newRequest/'+ data2store.petFileNumber+'-'+checklistType+'.json';
         successComment = "saved user comment!!";
-        dataStore.store(filename,userComments,successComment);
+        dataStore.store(userComments,successComment,checklistType);
         console.log("----------------------");
 
     });
