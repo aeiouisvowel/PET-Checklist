@@ -190,7 +190,7 @@ app.post("/sendChecklistData", (req, res) => {
         userCurrChecklist.store(req.body.originalRequest.data.data.personEmail,data2store);
 
         var successComment = "Created file for user information on Checklist!";
-        dataStore.store(data2store, successComment, "SOW");
+        //dataStore.store(data2store, successComment, "SOW");
 
         var speech = "Please reply in 'yes' / 'no'-followed by reason:\n1st Check : Template (Direct/Indirect Technology / Customer Specific)";
         return res.json({
