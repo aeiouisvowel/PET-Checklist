@@ -23,7 +23,7 @@ module.exports.sendMail = (toEmail, PID, checklistType, message) => {
         from: 'mailscheck123@gmail.com',
         to: toEmail,
         subject: checklistType + " Checklist : " + PID,
-        text: message,
+        html: message,
         attachments: [{
             path: './Data/newRequest/' + PID + '-' + checklistType + '.json'
         }]
