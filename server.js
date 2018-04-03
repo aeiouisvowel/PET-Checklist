@@ -213,7 +213,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "bcdaff92-b4c3-45a2-be1a-ec9aa45c11a9") {
+    if (req.body.result.metadata.intentId === "35b24218-f813-4476-80ef-735710ffe50f") {
         var data2store = {
             customer : req.body.result.resolvedQuery
         };
@@ -227,7 +227,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "52c45e9c-d30b-4c09-8070-5ce001d4b804") {
+    if (req.body.result.metadata.intentId === "09fa3906-2dc0-4376-9768-e08e104a1a4c") {
         var data2store = {
             mcc : req.body.result.resolvedQuery
         };
@@ -241,7 +241,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "5c87cbaf-678a-4c11-aff4-6cb60ef31ebd") {
+    if (req.body.result.metadata.intentId === "b68ef97e-c65e-4421-91ae-053232f4cae0") {
         var data2store = {
             spa : req.body.result.resolvedQuery
         };
@@ -255,7 +255,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "6e14c286-c97f-4c49-8bb7-f1b0ba447621") {
+    if (req.body.result.metadata.intentId === "d2a52f0e-fffc-4b5a-8529-9e0caa471449") {
         var data2store = {
             comment : req.body.result.resolvedQuery
         };
@@ -269,7 +269,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "8af744d1-1f9f-4daf-a643-2234659a8e83") {
+    if (req.body.result.metadata.intentId === "ec11f03f-126c-4034-91b6-af07d392838f") {
         var data2store = {
             deliverables : req.body.result.resolvedQuery
         };
@@ -283,7 +283,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "7c1784f1-7e66-4d3f-ac6b-b6f1a730d3df") {
+    if (req.body.result.metadata.intentId === "a57835e5-561f-4e26-a45c-087c707d610a") {
         var data2store = {
             draft : req.body.result.resolvedQuery
         };
@@ -297,7 +297,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "9e5b51ae-07be-4029-9762-f9ba5399ba59") {
+    if (req.body.result.metadata.intentId === "59b74074-faae-425b-aeb1-ec7c901a2bff") {
         var data2store = {
             milestone : req.body.result.resolvedQuery
         };
@@ -311,7 +311,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "ee82d9cc-d062-4097-9b04-0526faaf8e6c") {
+    if (req.body.result.metadata.intentId === "5e07c461-2cba-4f58-82de-12edac26267f") {
         var data2store = {
             header : req.body.result.resolvedQuery
         };
@@ -325,7 +325,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "9469eabd-1df8-4405-98f5-b0fd57277b4a") {
+    if (req.body.result.metadata.intentId === "5e85c4f7-2b4e-40b7-8223-ee6e7c824fd7") {
 
         var email = req.body.originalRequest.data.data.personEmail;
         var currPidNumber = JSON.parse(fs.readFileSync("./Data/userCurrChecklist/" + email + ".json", "utf8")).pidNumber;
@@ -336,7 +336,7 @@ app.post("/sendChecklistData", (req, res) => {
         };
         getFileAndStore.readfile(data2store, "standard", "SOW",email);
 
-
+        console.log("completed");
         var managerMessage = "</head><body>Hi,<br><br>SOW Checklist for PID : "+userData.pidNumber+" has been filled by "+email+" with the following data :<br><br><div class=WordSection1><table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;border:none'><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Checklist<o:p></o:p></span></b></p></td><td width=256 valign=top style='width:297.0pt;border:solid windowtext 1.0pt;border-left:none;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Comments/Reviews<o:p></o:p></span></b></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Template (Direct/Indirect Technology / Customer Specific)<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData.template+"<o:p></o:p></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Customer / Integrator Info<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData.customer+"<o:p></o:p></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>MCC sign off<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData.mcc+"<o:p></o:p></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>SPA/DA Review<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData.spa+"<o:p></o:p></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Add comment if in doubt<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData.comment+"<o:p></o:p></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Deliverables/Activities/A&amp;E matches LoE/PET?<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData.deliverables+"<o:p></o:p></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Draft Watermark?<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData.draft+"<o:p></o:p></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Milestone / Pricing matches the quota?<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData.milestone+"<o:p></o:p></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Header &amp; Footer Content?<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData.header+"<o:p></o:p></p></td></tr><tr><td width=215 valign=top style='width:193.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Standard filename convention<o:p></o:p></p></td><td width=256 valign=top style='width:297.0pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+data2store.standard+"<o:p></o:p></p></td></tr></table><br><br>please do the needful";
         mail.sendMail('kuabhis4@cisco.com', userData.pidNumber, "SOW", managerMessage);
 
@@ -348,7 +348,7 @@ app.post("/sendChecklistData", (req, res) => {
         });
     }
 
-    if (req.body.result.metadata.intentId === "3eba7c76-e435-415b-9931-c63495f516f1") {
+    if (req.body.result.metadata.intentId === "1ad99497-15ce-4757-b21f-84506cf98d3e") {
         var speech = "";
         if (req.body.result.parameters.fillMoreChecklist === "yes") {
             speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Proposal Checklist";
