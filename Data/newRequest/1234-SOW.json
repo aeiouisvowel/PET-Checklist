@@ -1,0 +1,13 @@
+{
+    "pidNumber": "1234",
+    "template": "a",
+    "customer": "b",
+    "mcc": "c",
+    "spa": "d",
+    "comment": "e",
+    "deliverables": "f",
+    "draft": "g",
+    "milestone": "h",
+    "header": "i",
+    "standard": "j"
+}
