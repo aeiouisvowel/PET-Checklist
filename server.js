@@ -341,6 +341,131 @@ app.post("/sendChecklistData", (req, res) => {
             displayText: speech,
         });
     }
+
+    //****************** RSVP Checklist ********************//
+    if (req.body.result.metadata.intentId === "da6761b2-9f81-4f56-978f-cb2d11e8cbf2") {
+        var speech = "Please provide the PID number";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "b0f5f736-79e0-4085-a2e9-d269f1798a32") {
+        var data2store = {
+            pidNumber: req.body.result.parameters.pidNumber
+        }
+
+        userCurrChecklist.store(req.body.originalRequest.data.data.personEmail, data2store);
+
+        var successComment = "Created file for user information on Checklist!";
+        dataStore.store(data2store, successComment, "RSVP");
+
+        var speech = "Please reply in 'yes' / 'no'-followed by reason:\n1st Check: Work-type";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "8b907837-3db6-4ab5-8fc7-80d471d6db65") {
+        var data2store = {
+            workType: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "workType", "RSVP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "2nd Check: Status Change on actual time";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "08ac9239-9d9a-4b0d-9dac-df87d4d04e3c") {
+        var data2store = {
+            statusChange: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "statusChange", "RSVP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "3rd Check: Deal Categorization";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "30429d6e-f201-4f89-97ec-22b934baba44") {
+        var data2store = {
+            dealCategorization: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "dealCategorization", "RSVP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "4th Check: List Price,Net Price and cost";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "42fb56f3-e440-4d43-98ad-b09df4f52f07") {
+        var data2store = {
+            listPrice: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "listPrice", "RSVP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "5th Check: Primary/Secondary Technology";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "750e13f2-cd76-42c1-b196-876543d872cf") {
+        var data2store = {
+            primary: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "primary", "RSVP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "6th Check: Request Feedback on case closure";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "f91db156-9664-4eb8-9754-fd2bb1b550a7") {
+        var data2store = {
+            reqFeedback: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "reqFeedback", "RSVP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "Completed, Thanks\nDo you wish to fill any other Checklist?";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "8564928a-b214-482e-8fbe-1d81b4f645a3") {
+        var speech = "";
+        if (req.body.result.parameters.fillMoreChecklist === "yes") {
+            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Proposal Checklist";
+        }
+        else {
+            speech = "Ok"
+        }
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
     //****************** Testing ********************//
 
     console.log("*******************************");

@@ -51,6 +51,26 @@ module.exports.readfile = (data2store, checklist, checklistType, email) => {
             if (checklist === "standard")
                 userComments.standard = data2store.standard;
             
+            //**** RSVP Checklist ****//
+            if (checklist === "workType")
+                userComments.workType = data2store.workType;
+
+            if (checklist === "statusChange")
+                userComments.statusChange = data2store.statusChange;
+
+            if (checklist === "dealCategorization")
+                userComments.dealCategorization = data2store.dealCategorization;
+
+            if (checklist === "listPrice")
+                userComments.listPrice = data2store.listPrice;
+
+            if (checklist === "primary")
+                userComments.primary = data2store.primary;
+
+            if (checklist === "reqFeedback")
+                userComments.reqFeedback = data2store.reqFeedback;
+            
+
             //****  ****//
 
             successComment = "saved user comment!!";
