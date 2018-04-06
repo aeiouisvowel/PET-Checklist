@@ -439,17 +439,27 @@ app.post("/sendChecklistData", (req, res) => {
     }
 
     if (req.body.result.metadata.intentId === "f91db156-9664-4eb8-9754-fd2bb1b550a7") {
+        var email = req.body.originalRequest.data.data.personEmail;
+        var currPidNumber = JSON.parse(fs.readFileSync("./Data/userCurrChecklist/" + email + ".json", "utf8")).pidNumber;
+        var userData = JSON.parse(fs.readFileSync('./Data/newRequest/' + currPidNumber + '-RSVP.json', "utf8"));
+
         var data2store = {
             reqFeedback: req.body.result.resolvedQuery
         };
+        getFileAndStore.readfile(data2store, "reqFeedback", "RSVP", email);
 
-        getFileAndStore.readfile(data2store, "reqFeedback", "RSVP", req.body.originalRequest.data.data.personEmail);
+        var managerMessage ="</head><body>Hi,<br><br>RSVP Checklist for PID : " + userData.pidNumber + " has been filled with the following data :<br><br><table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;border:none'><tr><td width=182 valign=top style='width:166.25pt;border:solid windowtext 1.0pt;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Checklist</span></b><o:p></o:p></p></td><td width=289 valign=top style='width:301.25pt;border:solid windowtext 1.0pt;border-left:none;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Comments/Reviews</span></b><o:p></o:p></p></td></tr><tr><td width=182 valign=top style='width:166.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Work-type<o:p></o:p></p></td><td width=289 valign=top style='width:301.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData. workType +"<o:p></o:p></p></td></tr><tr><td width=182 valign=top style='width:166.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Status Change on actual time<o:p></o:p></p></td><td width=289 valign=top style='width:301.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData. statusChange+"<o:p></o:p></p></td></tr><tr><td width=182 valign=top style='width:166.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Deal Categorization<o:p></o:p></p></td><td width=289 valign=top style='width:301.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData. dealCategorization+"<o:p></o:p></p></td></tr><tr><td width=182 valign=top style='width:166.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>List Price, Net Price and Cost<o:p></o:p></p></td><td width=289 valign=top style='width:301.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData. listPrice+"<o:p></o:p></p></td></tr><tr><td width=182 valign=top style='width:166.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Primary/Secondary Technology<o:p></o:p></p></td><td width=289 valign=top style='width:301.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+userData. primary+"<o:p></o:p></p></td></tr><tr><td width=182 valign=top style='width:166.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Request Feedback on case closure<o:p></o:p></p></td><td width=289 valign=top style='width:301.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+data2store. reqFeedback+"<o:p></o:p></p></td></tr></table>";
+        mail.sendMail(email, userData.pidNumber, "RSVP", managerMessage); 
 
-        var speech = "Completed, Thanks\nDo you wish to fill any other Checklist?";
+        var checklistData = "\n - Work-type :\n        " + userData.workType + "\n - Status Change on actual time :\n        " + userData.statusChange + "\n - Deal Categorization :\n        " + userData.dealCategorization + "\n - List Price, Net Price and Cost :\n        " + userData.listPrice + "\n - Primary/Secondary Technology :\n        " + userData.primary + "\n - Request Feedback on case closure :\n        " + data2store. reqFeedback + "\n";
+        var speech = "RSVP Checklist completed with following details:" + checklistData + "Thanks for the information.\nDo you wish to fill any other Checklist?";
+
         return res.json({
             speech: speech,
             displayText: speech,
         });
+
+
     }
 
     if (req.body.result.metadata.intentId === "8564928a-b214-482e-8fbe-1d81b4f645a3") {

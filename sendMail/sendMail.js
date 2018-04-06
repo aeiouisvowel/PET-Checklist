@@ -23,10 +23,7 @@ module.exports.sendMail = (toEmail, PID, checklistType, message) => {
         from: 'mailscheck123@gmail.com',
         to: toEmail,
         subject: checklistType + " Checklist : " + PID,
-        html: message,
-        attachments: [{
-            path: './Data/newRequest/' + PID + '-' + checklistType + '.json'
-        }]
+        html: message
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
