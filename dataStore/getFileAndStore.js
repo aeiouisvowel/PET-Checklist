@@ -71,7 +71,26 @@ module.exports.readfile = (data2store, checklist, checklistType, email) => {
                 userComments.reqFeedback = data2store.reqFeedback;
             
 
-            //****  ****//
+            //**** AST ****//
+            if (checklist === "cost")
+                userComments.cost = data2store.cost;
+
+            if (checklist === "sku")
+                userComments.sku = data2store.sku;
+
+            if (checklist === "partner")
+                userComments.partner = data2store.partner;
+
+            if (checklist === "correct")
+                userComments.correct = data2store.correct;
+
+            if (checklist === "lowSow")
+                userComments.lowSow = data2store.lowSow;
+
+            if (checklist === "sendMail")
+                userComments.sendMail = data2store.sendMail;
+            
+            //
 
             successComment = "saved user comment!!";
             dataStore.store(userComments, successComment, checklistType);
