@@ -90,7 +90,21 @@ module.exports.readfile = (data2store, checklist, checklistType, email) => {
             if (checklist === "sendMail")
                 userComments.sendMail = data2store.sendMail;
             
-            //
+            //**** PBP ****//
+            if (checklist === "sendEmail")
+                userComments.sendEmail = data2store.sendEmail;
+
+            if (checklist === "did")
+                userComments.did = data2store.did;
+
+            if (checklist === "customerReq")
+                userComments.customerReq = data2store.customerReq;
+
+            if (checklist === "scopeDel")
+                userComments.scopeDel = data2store.scopeDel;
+
+            if (checklist === "milePrice")
+                userComments.milePrice = data2store.milePrice;
 
             successComment = "saved user comment!!";
             dataStore.store(userComments, successComment, checklistType);

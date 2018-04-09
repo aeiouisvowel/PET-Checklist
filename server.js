@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.post("/sendChecklistData", (req, res) => {
 
     if (req.body.result.metadata.intentId === "2abdcf9a-431b-4f36-9c96-ece85e904168") {
-        var speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Proposal Checklist";
+        var speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Preliminary Budgetary Proposal (PBP) Checklist";
         return res.json({
             speech: speech,
             displayText: speech,
@@ -142,7 +142,7 @@ app.post("/sendChecklistData", (req, res) => {
     if (req.body.result.metadata.intentId === "e703989e-d43c-4896-9b6c-3f990bd7b075") {
         var speech = "";
         if (req.body.result.parameters.fillMoreChecklist === "yes") {
-            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Proposal Checklist";
+            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Preliminary Budgetary Proposal (PBP) Checklist";
         }
         else {
             speech = "Ok"
@@ -330,7 +330,7 @@ app.post("/sendChecklistData", (req, res) => {
     if (req.body.result.metadata.intentId === "1ad99497-15ce-4757-b21f-84506cf98d3e") {
         var speech = "";
         if (req.body.result.parameters.fillMoreChecklist === "yes") {
-            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Proposal Checklist";
+            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Preliminary Budgetary Proposal (PBP) Checklist";
         }
         else {
             speech = "Ok"
@@ -462,7 +462,7 @@ app.post("/sendChecklistData", (req, res) => {
     if (req.body.result.metadata.intentId === "8564928a-b214-482e-8fbe-1d81b4f645a3") {
         var speech = "";
         if (req.body.result.parameters.fillMoreChecklist === "yes") {
-            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Proposal Checklist";
+            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Preliminary Budgetary Proposal (PBP) Checklist";
         }
         else {
             speech = "Ok"
@@ -597,7 +597,125 @@ app.post("/sendChecklistData", (req, res) => {
     if (req.body.result.metadata.intentId === "060f6315-7cf9-45d6-a07d-ad8b16db46dc") {
         var speech = "";
         if (req.body.result.parameters.fillMoreChecklist === "yes") {
-            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Proposal Checklist";
+            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Preliminary Budgetary Proposal (PBP) Checklist";
+        }
+        else {
+            speech = "Ok"
+        }
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    //****************** PBP Checklist ********************//
+    if (req.body.result.metadata.intentId === "21204381-8561-4b8c-a48d-5d7d58718971") {
+        var speech = "Please provide the PID number";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "da2f78b4-39af-4054-9a79-86c979a449e5") {
+        var data2store = {
+            pidNumber: req.body.result.parameters.pidNumber
+        }
+
+        userCurrChecklist.store(req.body.originalRequest.data.data.personEmail, data2store);
+
+        var successComment = "Created file for user information on Checklist!";
+        dataStore.store(data2store, successComment, "PBP");
+
+        var speech = "Please reply in 'yes' / 'no'-followed by reason:\n1st Check: Send an email to CRT Approver to approve the PBP";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "82a50d02-19b0-4a74-9e2f-c9fae3379d17") {
+        var data2store = {
+            sendEmail: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "sendEmail", "PBP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "2nd Check: DID, PID, Customer/Project name";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "518987a5-855b-4ddb-9675-8abd68bd16ee") {
+        var data2store = {
+            did: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "did", "PBP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "3rd Check: Customer requirements";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "c152468c-d43a-4f5c-b5a7-a46e712ad79b") {
+        var data2store = {
+            customerReq: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "customerReq", "PBP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "4th Check: Scope/Deliverables/Activities/A&E matches LoE/PET";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "96fafd99-013a-45bc-970f-4f99f00582ae") {
+        var data2store = {
+            scopeDel: req.body.result.resolvedQuery
+        };
+
+        getFileAndStore.readfile(data2store, "scopeDel", "PBP", req.body.originalRequest.data.data.personEmail);
+
+        var speech = "5th Check: Milestone/Pricing matches the PET";
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "7f81e883-d74a-455d-8d2c-5d8783da8cc6") {
+        var email = req.body.originalRequest.data.data.personEmail;
+        var currPidNumber = JSON.parse(fs.readFileSync("./Data/userCurrChecklist/" + email + ".json", "utf8")).pidNumber;
+        var userData = JSON.parse(fs.readFileSync('./Data/newRequest/' + currPidNumber + '-PBP.json', "utf8"));
+
+        var data2store = {
+            milePrice: req.body.result.resolvedQuery
+        };
+        getFileAndStore.readfile(data2store, "milePrice", "PBP", email);
+
+        var managerMessage ="</head><body>Hi,<br><br>PBP Checklist for PID : " + userData.pidNumber + " has been filled with the following data :<br><br><table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;border:none'><tr><td width=255 valign=top style='width:242.75pt;border:solid windowtext 1.0pt;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Checklist</span></b><o:p></o:p></p></td><td width=216 valign=top style='width:256.5pt;border:solid windowtext 1.0pt;border-left:none;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Comments/Reviews</span></b><o:p></o:p></p></td></tr><tr><td width=255 valign=top style='width:242.75pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Send an email to CRT Approver to approve the PBP<o:p></o:p></p></td><td width=216 valign=top style='width:256.5pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.sendEmail +"<o:p></o:p></p></td></tr><tr><td width=255 valign=top style='width:242.75pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>DID, PID, Customer/Project name<o:p></o:p></p></td><td width=216 valign=top style='width:256.5pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.did +"<o:p></o:p></p></td></tr><tr><td width=255 valign=top style='width:242.75pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Customer requirements<o:p></o:p></p></td><td width=216 valign=top style='width:256.5pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.customerReq +"<o:p></o:p></p></td></tr><tr><td width=255 valign=top style='width:242.75pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Scope/Deliverables/Activities/A&amp;E matches LoE/PET<o:p></o:p></p></td><td width=216 valign=top style='width:256.5pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.scopeDel +"<o:p></o:p></p></td></tr><tr><td width=255 valign=top style='width:242.75pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Milestone/Pricing matches the PET<o:p></o:p></p></td><td width=216 valign=top style='width:256.5pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+data2store.milePrice +"<o:p></o:p></p></td></tr></table>";
+        mail.sendMail(email, userData.pidNumber, "PBP", managerMessage); 
+
+        var checklistData = "\n - Send an email to CRT Approver to approve the PBP :\n        " + userData.sendEmail + "\n - DID, PID, Customer/Project name :\n        " + userData.did + "\n - Customer requirements :\n        " + userData.customerReq + "\n - Scope/Deliverables/Activities/A&E matches LoE/PET :\n        " + userData.scopeDel + "\n - Milestone/Pricing matches the PET :\n        " + data2store.milePrice + "\n";
+        var speech = "PBP Checklist completed with following details:" + checklistData + "Thanks for the information.\nDo you wish to fill any other Checklist?";
+
+        return res.json({
+            speech: speech,
+            displayText: speech,
+        });
+    }
+
+    if (req.body.result.metadata.intentId === "fdebf6e9-9a96-4012-bf69-b467a5a11829") {
+        var speech = "";
+        if (req.body.result.parameters.fillMoreChecklist === "yes") {
+            speech = "Which checklist you want to fill. Select from the options:\n1. PET Checklist\n2. SoW Checklist\n3. RSVP Checklist\n4. AST quote Checklist\n5. Preliminary Budgetary Proposal (PBP) Checklist";
         }
         else {
             speech = "Ok"
