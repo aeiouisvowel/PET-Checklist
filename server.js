@@ -45,7 +45,7 @@ app.post("/sendChecklistData", (req, res) => {
 
     if (req.body.result.metadata.intentId === "42017ae9-a1b8-4a20-b67d-783835238a3b") {
         var data2store = {
-            pidNumber: req.body.result.parameters.pidNumber
+            pidNumber: req.body.result.resolvedQuery
         }
 
         userCurrChecklist.store(req.body.originalRequest.data.data.personEmail, data2store);
@@ -164,7 +164,7 @@ app.post("/sendChecklistData", (req, res) => {
 
     if (req.body.result.metadata.intentId === "c1f03738-f383-485b-aa2e-b36fd5f6febe") {
         var data2store = {
-            pidNumber: req.body.result.parameters.pidNumber
+            pidNumber: req.body.result.resolvedQuery
         }
 
         userCurrChecklist.store(req.body.originalRequest.data.data.personEmail, data2store);
@@ -352,7 +352,7 @@ app.post("/sendChecklistData", (req, res) => {
 
     if (req.body.result.metadata.intentId === "b0f5f736-79e0-4085-a2e9-d269f1798a32") {
         var data2store = {
-            pidNumber: req.body.result.parameters.pidNumber
+            pidNumber: req.body.result.resolvedQuery
         }
 
         userCurrChecklist.store(req.body.originalRequest.data.data.personEmail, data2store);
@@ -484,7 +484,7 @@ app.post("/sendChecklistData", (req, res) => {
 
     if (req.body.result.metadata.intentId === "be9c4844-b82c-42d0-a9fd-f79839577b95") {
         var data2store = {
-            pidNumber: req.body.result.parameters.pidNumber
+            pidNumber: req.body.result.resolvedQuery
         }
 
         userCurrChecklist.store(req.body.originalRequest.data.data.personEmail, data2store);
@@ -492,7 +492,7 @@ app.post("/sendChecklistData", (req, res) => {
         var successComment = "Created file for user information on Checklist!";
         dataStore.store(data2store, successComment, "AST");
 
-        var speech = "Please reply in 'yes' / 'no'-followed by reason:\n1st Check: Cost, Net Price and Marin";
+        var speech = "Please reply in 'yes' / 'no'-followed by reason:\n1st Check: Cost, Net Price and Margin";
         return res.json({
             speech: speech,
             displayText: speech,
@@ -579,13 +579,10 @@ app.post("/sendChecklistData", (req, res) => {
         };
         getFileAndStore.readfile(data2store, "sendMail", "AST", email);
 
-        console.log(userData);
-        console.log(data2store);
-
-        var managerMessage ="</head><body>Hi,<br><br>AST Checklist for PID : " + userData.pidNumber + " has been filled with the following data :<br><br><table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;border:none'><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Checklist</span></b><o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border:solid windowtext 1.0pt;border-left:none;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Comments/Reviews</span></b><o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Cost, Net Price and Marin<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal> "+ userData.cost +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>SKU, Resource Type<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.sku +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Partner Cost and T&amp;E<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.partner +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Correct DID/PID<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.correct +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>LOE/SOW attached (APJC-specific)<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.lowSow +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Send an email to CRT Approver to approve the quote<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+data2store.sendMail +"<o:p></o:p></p></td></tr></table>";
+        var managerMessage ="</head><body>Hi,<br><br>AST Checklist for PID : " + userData.pidNumber + " has been filled with the following data :<br><br><table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;border:none'><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Checklist</span></b><o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border:solid windowtext 1.0pt;border-left:none;background:black;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal><b><span style='color:white'>Comments/Reviews</span></b><o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Cost, Net Price and Margin<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal> "+ userData.cost +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>SKU, Resource Type<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.sku +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Partner Cost and T&amp;E<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.partner +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Correct DID/PID<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.correct +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>LOE/SOW attached (APJC-specific)<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>" + userData.lowSow +"<o:p></o:p></p></td></tr><tr><td width=172 valign=top style='width:175.25pt;border:solid windowtext 1.0pt;border-top:none;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>Send an email to CRT Approver to approve the quote<o:p></o:p></p></td><td width=299 valign=top style='width:292.25pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'><p class=MsoNormal>"+data2store.sendMail +"<o:p></o:p></p></td></tr></table>";
         mail.sendMail(email, userData.pidNumber, "AST", managerMessage); 
 
-        var checklistData = "\n - Cost, Net Price and Marin :\n        " + userData.cost + "\n - SKU, Resource Type :\n        " + userData.sku + "\n - Partner Cost and T&E :\n        " + userData.partner + "\n - Correct DID/PID :\n        " + userData.correct + "\n - LOE/SOW attached (APJC-specific) :\n        " + userData.lowSow + "\n - Send an email to CRT Approver to approve the quote :\n        " + data2store.sendMail + "\n";
+        var checklistData = "\n - Cost, Net Price and Margin :\n        " + userData.cost + "\n - SKU, Resource Type :\n        " + userData.sku + "\n - Partner Cost and T&E :\n        " + userData.partner + "\n - Correct DID/PID :\n        " + userData.correct + "\n - LOE/SOW attached (APJC-specific) :\n        " + userData.lowSow + "\n - Send an email to CRT Approver to approve the quote :\n        " + data2store.sendMail + "\n";
         var speech = "AST Checklist completed with following details:" + checklistData + "Thanks for the information.\nDo you wish to fill any other Checklist?";
 
         return res.json({
@@ -619,7 +616,7 @@ app.post("/sendChecklistData", (req, res) => {
 
     if (req.body.result.metadata.intentId === "da2f78b4-39af-4054-9a79-86c979a449e5") {
         var data2store = {
-            pidNumber: req.body.result.parameters.pidNumber
+            pidNumber: req.body.result.resolvedQuery
         }
 
         userCurrChecklist.store(req.body.originalRequest.data.data.personEmail, data2store);
